@@ -12,15 +12,63 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: -apple-system, system-ui, sans-serif;
+  font-family: -apple-system, system-ui, 'Segoe UI', Roboto, sans-serif;
   background: #fff;
   color: #2c3e50;
   line-height: 1.6;
 }
 
+/* Floating TOC — desktop only */
+.toc {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+  width: 190px;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px 14px;
+  font-size: 13px;
+  z-index: 100;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.toc-title {
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.toc a {
+  display: block;
+  color: #2c3e50;
+  text-decoration: none;
+  padding: 4px 0;
+  border-left: 2px solid transparent;
+  padding-left: 10px;
+  transition: all 0.2s;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.toc a:hover,
+.toc a.active {
+  color: #3498db;
+  border-left-color: #3498db;
+  background: #ebf5fb;
+}
+
 .container {
-  max-width: 1000px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 40px 20px;
 }
@@ -34,21 +82,21 @@ body {
 }
 
 .header h1 {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
   margin-bottom: 10px;
   color: #1a1a2e;
 }
 
 .header .subtitle {
-  font-size: 16px;
+  font-size: 15px;
   color: #555;
   font-style: italic;
 }
 
 /* Section titles */
 .section-title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
   color: #1a1a2e;
   margin-bottom: 20px;
@@ -57,10 +105,16 @@ body {
   display: inline-block;
 }
 
+.section-number {
+  color: #3498db;
+  margin-right: 6px;
+}
+
 section {
   margin-bottom: 50px;
   padding-bottom: 30px;
   border-bottom: 1px solid #e0e0e0;
+  scroll-margin-top: 30px;
 }
 
 /* Charts */
@@ -73,12 +127,441 @@ section {
 
 .chart-wrapper {
   flex: 1;
-  min-width: 420px;
-  max-width: 480px;
+  min-width: 400px;
+  max-width: 460px;
   background: #fafafa;
   border: 1px solid #e0e0e0;
   border-radius: 6px;
   padding: 15px;
+}
+
+/* Layer Slider */
+.slider-section {
+  margin-top: 30px;
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.slider-label {
+  font-weight: 600;
+  font-size: 15px;
+  color: #1a1a2e;
+}
+
+.layer-display {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 80px;
+  text-align: center;
+}
+
+.slider-input-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.slider-input-row input[type="range"] {
+  flex: 1;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #ddd;
+  border-radius: 3px;
+  outline: none;
+}
+
+.slider-input-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #3498db;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.slider-input-row input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #3498db;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+  margin-bottom: 20px;
+}
+
+.slider-ticks span {
+  font-size: 11px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.slider-ticks span:hover {
+  color: #3498db;
+}
+
+.bar-chart-area {
+  display: flex;
+  gap: 20px;
+}
+
+.bar-group {
+  flex: 1;
+}
+
+.bar-group-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.bars-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  height: 160px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 2px;
+}
+
+.bar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 55px;
+}
+
+.bar {
+  width: 36px;
+  border-radius: 3px 3px 0 0;
+  transition: height 0.4s ease;
+  position: relative;
+}
+
+.bar-value {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  color: #333;
+  min-height: 16px;
+}
+
+.bar-label {
+  font-size: 10px;
+  color: #666;
+  margin-top: 5px;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.bar-wavlm { background: #e74c3c; }
+.bar-hubert { background: #3498db; }
+.bar-wav2vec { background: #27ae60; }
+.bar-base { background: #9b59b6; }
+
+/* Phoneme substitution demo */
+.substitution-demo {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 10px;
+}
+
+.demo-title {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: #1a1a2e;
+}
+
+.phoneme-comparison {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.phoneme-row {
+  flex: 1;
+  min-width: 260px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.phoneme-row-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.phoneme-boxes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.phoneme-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: 'Segoe UI', 'Noto Sans', sans-serif;
+  border: 2px solid #ddd;
+  background: #fff;
+  color: #333;
+  transition: all 0.3s;
+}
+
+.phoneme-box.match {
+  border-color: #27ae60;
+  background: #e8f8f5;
+  color: #27ae60;
+}
+
+.phoneme-box.substitution {
+  border-color: #e74c3c;
+  background: #fdedec;
+  color: #e74c3c;
+  animation: pulse-red 2s infinite;
+}
+
+.phoneme-box.corrected {
+  border-color: #e67e22;
+  background: #fef9e7;
+  color: #e67e22;
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(231,76,60,0.3); }
+  50% { box-shadow: 0 0 0 6px rgba(231,76,60,0); }
+}
+
+.asr-output-row {
+  background: #fff;
+  border: 2px dashed #e67e22;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+.correction-note {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: #fef9e7;
+  border-left: 4px solid #f39c12;
+  border-radius: 0 6px 6px 0;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+}
+
+.correction-note strong {
+  color: #e67e22;
+}
+
+/* Waveform animation */
+.waveform-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  height: 40px;
+  margin: 10px 0;
+}
+
+.wave-bar {
+  width: 3px;
+  background: #3498db;
+  border-radius: 2px;
+  animation: wave 1.2s ease-in-out infinite;
+}
+
+.wave-bar:nth-child(1) { animation-delay: 0s; height: 10px; }
+.wave-bar:nth-child(2) { animation-delay: 0.1s; height: 20px; }
+.wave-bar:nth-child(3) { animation-delay: 0.15s; height: 30px; }
+.wave-bar:nth-child(4) { animation-delay: 0.2s; height: 15px; }
+.wave-bar:nth-child(5) { animation-delay: 0.25s; height: 35px; }
+.wave-bar:nth-child(6) { animation-delay: 0.3s; height: 20px; }
+.wave-bar:nth-child(7) { animation-delay: 0.35s; height: 25px; }
+.wave-bar:nth-child(8) { animation-delay: 0.4s; height: 10px; }
+.wave-bar:nth-child(9) { animation-delay: 0.45s; height: 30px; }
+.wave-bar:nth-child(10) { animation-delay: 0.5s; height: 18px; }
+.wave-bar:nth-child(11) { animation-delay: 0.55s; height: 28px; }
+.wave-bar:nth-child(12) { animation-delay: 0.6s; height: 12px; }
+.wave-bar:nth-child(13) { animation-delay: 0.65s; height: 22px; }
+.wave-bar:nth-child(14) { animation-delay: 0.7s; height: 16px; }
+.wave-bar:nth-child(15) { animation-delay: 0.75s; height: 32px; }
+.wave-bar:nth-child(16) { animation-delay: 0.8s; height: 14px; }
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(1.8); }
+}
+
+/* Freeze animation */
+.freeze-animation-area {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 20px;
+}
+
+.freeze-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.freeze-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #fff;
+}
+
+.freeze-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.freeze-btn-start {
+  background: #3498db;
+}
+
+.freeze-btn-reset {
+  background: #95a5a6;
+}
+
+.freeze-step-indicator {
+  font-size: 13px;
+  color: #555;
+  font-weight: 500;
+  margin-left: auto;
+}
+
+.freeze-step-indicator .step-label {
+  font-weight: 700;
+}
+
+.freeze-bars-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.freeze-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.freeze-bar-name {
+  width: 70px;
+  font-size: 13px;
+  font-weight: 500;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.freeze-bar-track {
+  flex: 1;
+  height: 28px;
+  background: #eee;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.freeze-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.8s ease, background-color 0.8s ease;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  min-width: 40px;
+}
+
+.freeze-bar-fill.baseline {
+  background: #27ae60;
+}
+
+.freeze-bar-fill.cpt {
+  background: #e74c3c;
+}
+
+.freeze-bar-fill.freeze {
+  background: #3498db;
+}
+
+.freeze-legend {
+  display: flex;
+  gap: 20px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.freeze-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #555;
+}
+
+.freeze-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
 }
 
 /* Tables */
@@ -130,79 +613,124 @@ tbody tr:hover {
   overflow-x: auto;
 }
 
-.recovery-green {
-  background-color: #d5f5e3;
-}
+.recovery-green { background-color: #d5f5e3; }
+.recovery-yellow { background-color: #fcf3cf; }
+.recovery-red { background-color: #fadbd8; }
 
-.recovery-yellow {
-  background-color: #fcf3cf;
-}
-
-.recovery-red {
-  background-color: #fadbd8;
-}
-
-/* Evidence chain */
-.evidence-chain {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.evidence-box {
-  flex: 1;
-  min-width: 115px;
-  max-width: 135px;
-  text-align: center;
+/* Evidence timeline */
+.timeline {
   position: relative;
+  padding-left: 32px;
 }
 
-.evidence-box .box-inner {
-  border-radius: 6px;
-  padding: 12px 8px;
-  min-height: 70px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #ddd;
+  border-radius: 2px;
 }
 
-.evidence-box .box-number {
-  font-size: 13px;
-  font-weight: 700;
-  margin-bottom: 2px;
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
 }
 
-.evidence-box .box-title {
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.evidence-box .box-desc {
-  font-size: 11px;
-  color: #555;
-  margin-top: 6px;
-  line-height: 1.3;
-}
-
-.evidence-arrow {
+.timeline-dot {
+  position: absolute;
+  left: -26px;
+  top: 6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  padding-top: 15px;
-  color: #999;
-  font-size: 20px;
+  justify-content: center;
+  font-size: 10px;
   font-weight: 700;
+  color: #fff;
+  z-index: 2;
 }
 
-.ev-color-1 { background: #ebf5fb; border: 1px solid #aed6f1; }
-.ev-color-2 { background: #fdf2e9; border: 1px solid #f5cba7; }
-.ev-color-3 { background: #e8f8f5; border: 1px solid #a3e4d7; }
-.ev-color-4 { background: #f5eef8; border: 1px solid #d2b4de; }
-.ev-color-5 { background: #fdedec; border: 1px solid #f5b7b1; }
-.ev-color-6 { background: #eafaf1; border: 1px solid #a9dfbf; }
-.ev-color-7 { background: #fef9e7; border: 1px solid #f9e79f; }
+.timeline-card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.timeline-card:hover {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.timeline-card-header {
+  padding: 12px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.timeline-card-header:hover {
+  filter: brightness(0.97);
+}
+
+.timeline-card-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1a1a2e;
+}
+
+.timeline-card-desc {
+  font-size: 12px;
+  color: #555;
+  margin-top: 2px;
+}
+
+.timeline-toggle {
+  font-size: 12px;
+  color: #3498db;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: transform 0.3s;
+}
+
+.timeline-card-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #444;
+  border-top: 0px solid transparent;
+}
+
+.timeline-card-body.open {
+  max-height: 300px;
+  padding: 14px 16px;
+  border-top: 1px solid #e8e8e8;
+}
+
+.ev-bg-1 { background: #ebf5fb; }
+.ev-bg-2 { background: #fdf2e9; }
+.ev-bg-3 { background: #e8f8f5; }
+.ev-bg-4 { background: #f5eef8; }
+.ev-bg-5 { background: #fdedec; }
+.ev-bg-6 { background: #eafaf1; }
+.ev-bg-7 { background: #fef9e7; }
+
+.dot-1 { background: #3498db; }
+.dot-2 { background: #e67e22; }
+.dot-3 { background: #1abc9c; }
+.dot-4 { background: #9b59b6; }
+.dot-5 { background: #e74c3c; }
+.dot-6 { background: #2ecc71; }
+.dot-7 { background: #f1c40f; }
 
 /* Footer */
 .footer {
@@ -210,6 +738,11 @@ tbody tr:hover {
   padding-top: 20px;
   color: #888;
   font-size: 13px;
+}
+
+/* Responsive */
+@media (max-width: 1260px) {
+  .toc { display: none; }
 }
 
 @media (max-width: 900px) {
@@ -220,16 +753,27 @@ tbody tr:hover {
   .chart-wrapper {
     min-width: 100%;
   }
-  .evidence-chain {
-    flex-wrap: wrap;
+  .bar-chart-area {
+    flex-direction: column;
   }
-  .evidence-arrow {
-    display: none;
+  .phoneme-comparison {
+    flex-direction: column;
   }
 }
 </style>
 </head>
 <body>
+
+<!-- Floating Table of Contents -->
+<nav class="toc" id="toc">
+  <div class="toc-title">Contents</div>
+  <a href="#sec-probing">1. Cross-Model Probing</a>
+  <a href="#sec-slider">2. Layer Explorer</a>
+  <a href="#sec-demo">3. Phoneme Substitution</a>
+  <a href="#sec-tables">4. Phoneme-Level Analysis</a>
+  <a href="#sec-freeze">5. Freeze Recovery</a>
+  <a href="#sec-evidence">6. Evidence Chain</a>
+</nav>
 
 <div class="container">
 
@@ -239,9 +783,9 @@ tbody tr:hover {
     <p class="subtitle">Cross-Model Probing of Developmental Information in Children's Speech</p>
   </div>
 
-  <!-- Charts Section -->
-  <section>
-    <h2 class="section-title">Cross-Model Probing Results</h2>
+  <!-- Section 1: Charts -->
+  <section id="sec-probing">
+    <h2 class="section-title"><span class="section-number">1</span>Cross-Model Probing Results</h2>
     <div class="charts-container">
       <div class="chart-wrapper">
         <canvas id="ageChart"></canvas>
@@ -252,9 +796,95 @@ tbody tr:hover {
     </div>
   </section>
 
-  <!-- Tables Section -->
-  <section>
-    <h2 class="section-title">Phoneme-Level Analysis</h2>
+  <!-- Section 2: Layer Explorer Slider -->
+  <section id="sec-slider">
+    <h2 class="section-title"><span class="section-number">2</span>Layer-wise Explorer</h2>
+    <p style="font-size:14px; color:#555; margin-bottom:16px;">Drag the slider to explore how age and speaking-rate information is distributed across model layers. The bar charts update in real time, and a highlight dot tracks the selected layer on the line charts above.</p>
+    <div class="slider-section">
+      <div class="slider-header">
+        <span class="slider-label">Select Layer</span>
+        <span class="layer-display" id="layerDisplay">FP</span>
+      </div>
+      <div class="slider-input-row">
+        <input type="range" id="layerSlider" min="0" max="6" value="0" step="1">
+      </div>
+      <div class="slider-ticks" id="sliderTicks"></div>
+      <div class="bar-chart-area">
+        <div class="bar-group">
+          <div class="bar-group-title">Age Probing Accuracy (%)</div>
+          <div class="bars-container" id="ageBars"></div>
+        </div>
+        <div class="bar-group">
+          <div class="bar-group-title">Rate Probing Accuracy (%)</div>
+          <div class="bars-container" id="rateBars"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Phoneme Substitution Demo -->
+  <section id="sec-demo">
+    <h2 class="section-title"><span class="section-number">3</span>The Correction Paradox</h2>
+    <p style="font-size:14px; color:#555; margin-bottom:16px;">Children acquiring speech make systematic substitutions (e.g., /w/ for /r/). These are not errors to be corrected -- they carry developmental information. When ASR models are fine-tuned on children's speech, they learn to "correct" these patterns, destroying clinically relevant information.</p>
+
+    <div class="substitution-demo">
+      <div class="demo-title">Example: "rabbit" /r/ &rarr; /w/ substitution</div>
+
+      <!-- Visual waveform -->
+      <div class="waveform-container">
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+        <div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div><div class="wave-bar"></div>
+      </div>
+
+      <div class="phoneme-comparison">
+        <!-- Reference -->
+        <div class="phoneme-row">
+          <div class="phoneme-row-label">Adult reference</div>
+          <div class="phoneme-boxes">
+            <div class="phoneme-box match">/&#633;/</div>
+            <div class="phoneme-box match">/&aelig;/</div>
+            <div class="phoneme-box match">/b/</div>
+            <div class="phoneme-box match">/&#618;/</div>
+            <div class="phoneme-box match">/t/</div>
+          </div>
+        </div>
+
+        <!-- Child production -->
+        <div class="phoneme-row">
+          <div class="phoneme-row-label">Child production (age 3-4)</div>
+          <div class="phoneme-boxes">
+            <div class="phoneme-box substitution">/w/</div>
+            <div class="phoneme-box match">/&aelig;/</div>
+            <div class="phoneme-box match">/b/</div>
+            <div class="phoneme-box match">/&#618;/</div>
+            <div class="phoneme-box match">/t/</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ASR output -->
+      <div class="phoneme-row asr-output-row">
+        <div class="phoneme-row-label">ASR output after corpus-level adaptation</div>
+        <div class="phoneme-boxes">
+          <div class="phoneme-box corrected">/&#633;/</div>
+          <div class="phoneme-box match">/&aelig;/</div>
+          <div class="phoneme-box match">/b/</div>
+          <div class="phoneme-box match">/&#618;/</div>
+          <div class="phoneme-box match">/t/</div>
+        </div>
+      </div>
+
+      <div class="correction-note">
+        <strong>The Correction Paradox:</strong> The adapted model maps the child's /w/ back to the adult /&#633;/. Word-level accuracy improves (PER drops from 25.19% to 24.93%), but the developmental substitution pattern -- which SLPs use for diagnosis -- is erased. Liquids show the largest damage: PER increases from 28.48% to 45.22% at the phoneme level.
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Tables -->
+  <section id="sec-tables">
+    <h2 class="section-title"><span class="section-number">4</span>Phoneme-Level Analysis</h2>
 
     <div class="table-wrapper">
       <table>
@@ -378,71 +1008,149 @@ tbody tr:hover {
     </div>
   </section>
 
-  <!-- Evidence Chain Section -->
-  <section>
-    <h2 class="section-title">Evidence Chain</h2>
-    <div class="evidence-chain">
+  <!-- Section 5: Freeze Recovery Animation -->
+  <section id="sec-freeze">
+    <h2 class="section-title"><span class="section-number">5</span>Freeze Recovery Animation</h2>
+    <p style="font-size:14px; color:#555; margin-bottom:16px;">Click the button to see how corpus-level adaptation (CPT) damages phoneme-category accuracy, and how layer freezing (Freeze-6) recovers it.</p>
 
-      <div class="evidence-box">
-        <div class="box-inner ev-color-1">
-          <div class="box-number">&#9312;</div>
-          <div class="box-title">Factorial ANOVA</div>
+    <div class="freeze-animation-area">
+      <div class="freeze-controls">
+        <button class="freeze-btn freeze-btn-start" id="freezeStartBtn" onclick="runFreezeAnimation()">Show CPT Damage &rarr; Freeze Recovery</button>
+        <button class="freeze-btn freeze-btn-reset" id="freezeResetBtn" onclick="resetFreezeAnimation()">Reset</button>
+        <div class="freeze-step-indicator" id="freezeStepLabel">
+          <span class="step-label">Ready</span>
         </div>
-        <div class="box-desc">Adaptation strategy significantly affects PER (F=32.23, p&lt;.001)</div>
       </div>
-      <div class="evidence-arrow">&rarr;</div>
 
-      <div class="evidence-box">
-        <div class="box-inner ev-color-2">
-          <div class="box-number">&#9313;</div>
-          <div class="box-title">Training Dynamics</div>
-        </div>
-        <div class="box-desc">CPT degrades then recovers; freezing stabilizes early</div>
+      <div class="freeze-bars-area" id="freezeBarsArea">
+        <!-- Filled by JS -->
       </div>
-      <div class="evidence-arrow">&rarr;</div>
 
-      <div class="evidence-box">
-        <div class="box-inner ev-color-3">
-          <div class="box-number">&#9314;</div>
-          <div class="box-title">Layer Probing</div>
-        </div>
-        <div class="box-desc">Age in early layers (L1), rate in late layers (L24)</div>
+      <div class="freeze-legend">
+        <div class="freeze-legend-item"><div class="freeze-legend-dot" style="background:#27ae60;"></div>E1 Baseline</div>
+        <div class="freeze-legend-item"><div class="freeze-legend-dot" style="background:#e74c3c;"></div>E2 (CPT) &mdash; damage</div>
+        <div class="freeze-legend-item"><div class="freeze-legend-dot" style="background:#3498db;"></div>Freeze-6 &mdash; recovery</div>
       </div>
-      <div class="evidence-arrow">&rarr;</div>
+    </div>
+  </section>
 
-      <div class="evidence-box">
-        <div class="box-inner ev-color-4">
-          <div class="box-number">&#9315;</div>
-          <div class="box-title">Concept Erasure</div>
+  <!-- Section 6: Evidence Chain Timeline -->
+  <section id="sec-evidence">
+    <h2 class="section-title"><span class="section-number">6</span>Evidence Chain</h2>
+    <p style="font-size:14px; color:#555; margin-bottom:20px;">Our argument is built on a seven-step causal chain. Click each step to learn more.</p>
+
+    <div class="timeline" id="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot dot-1">1</div>
+        <div class="timeline-card">
+          <div class="timeline-card-header ev-bg-1" onclick="toggleTimeline(this)">
+            <div>
+              <div class="timeline-card-title">Factorial ANOVA</div>
+              <div class="timeline-card-desc">Adaptation strategy significantly affects PER (F=32.23, p&lt;.001)</div>
+            </div>
+            <span class="timeline-toggle">+ details</span>
+          </div>
+          <div class="timeline-card-body">
+            A two-way factorial ANOVA (Strategy x Epoch) reveals a significant main effect of adaptation strategy on phoneme error rate (F=32.23, p&lt;.001, Cohen's d=0.85). This confirms that how we adapt the model matters, not just how long we train it.
+          </div>
         </div>
-        <div class="box-desc">Removing age causes +13.73% PER (causal evidence)</div>
       </div>
-      <div class="evidence-arrow">&rarr;</div>
 
-      <div class="evidence-box">
-        <div class="box-inner ev-color-5">
-          <div class="box-number">&#9316;</div>
-          <div class="box-title">Layer Freezing</div>
+      <div class="timeline-item">
+        <div class="timeline-dot dot-2">2</div>
+        <div class="timeline-card">
+          <div class="timeline-card-header ev-bg-2" onclick="toggleTimeline(this)">
+            <div>
+              <div class="timeline-card-title">Training Dynamics</div>
+              <div class="timeline-card-desc">CPT degrades then recovers; freezing stabilizes early</div>
+            </div>
+            <span class="timeline-toggle">+ details</span>
+          </div>
+          <div class="timeline-card-body">
+            Standard CPT shows a characteristic U-shaped curve: PER initially worsens as pre-trained representations are disrupted, then partially recovers as the model re-learns. Layer freezing bypasses this degradation entirely, achieving competitive PER (25.34%) from early epochs without the representation damage.
+          </div>
         </div>
-        <div class="box-desc">Freeze-6 preserves age encoding, recovers PER to 25.34%</div>
       </div>
-      <div class="evidence-arrow">&rarr;</div>
 
-      <div class="evidence-box">
-        <div class="box-inner ev-color-6">
-          <div class="box-number">&#9317;</div>
-          <div class="box-title">Phoneme Recovery</div>
+      <div class="timeline-item">
+        <div class="timeline-dot dot-3">3</div>
+        <div class="timeline-card">
+          <div class="timeline-card-header ev-bg-3" onclick="toggleTimeline(this)">
+            <div>
+              <div class="timeline-card-title">Layer Probing (Level A)</div>
+              <div class="timeline-card-desc">Age in early layers (L1=77.9%), rate in late layers (L24=81.4%)</div>
+            </div>
+            <span class="timeline-toggle">+ details</span>
+          </div>
+          <div class="timeline-card-body">
+            Probing classifiers trained on frozen layer representations show that age-group information concentrates in early layers (Layer 1: 77.9%) while speaking-rate peaks in late layers (Layer 24: 81.4%). Paired t-test confirms significant separation (t=3.36, p=.028). This is Level A evidence: the information is decodable.
+          </div>
         </div>
-        <div class="box-desc">Liquids 99%, stops 127%; category-level validation</div>
       </div>
-      <div class="evidence-arrow">&rarr;</div>
 
-      <div class="evidence-box">
-        <div class="box-inner ev-color-7">
-          <div class="box-number">&#9318;</div>
-          <div class="box-title">Cross-Model</div>
+      <div class="timeline-item">
+        <div class="timeline-dot dot-4">4</div>
+        <div class="timeline-card">
+          <div class="timeline-card-header ev-bg-4" onclick="toggleTimeline(this)">
+            <div>
+              <div class="timeline-card-title">Concept Erasure (Level B)</div>
+              <div class="timeline-card-desc">Removing age causes +13.73% PER increase</div>
+            </div>
+            <span class="timeline-toggle">+ details</span>
+          </div>
+          <div class="timeline-card-body">
+            Iterative Null-space Projection (INLP) removes age information from the representations. The resulting +13.73% PER increase is Level B causal evidence: the model is not merely encoding age -- it actively relies on age representations for phoneme recognition. This moves beyond correlation (probing) to intervention.
+          </div>
         </div>
-        <div class="box-desc">Age universal (4 models), rate hierarchy WavLM-specific</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot dot-5">5</div>
+        <div class="timeline-card">
+          <div class="timeline-card-header ev-bg-5" onclick="toggleTimeline(this)">
+            <div>
+              <div class="timeline-card-title">Layer Freezing</div>
+              <div class="timeline-card-desc">Freeze-6 preserves age, recovers PER to 25.34%</div>
+            </div>
+            <span class="timeline-toggle">+ details</span>
+          </div>
+          <div class="timeline-card-body">
+            Freezing the first 6 transformer layers prevents CPT from overwriting the age-encoding early layers while still allowing task-specific adaptation in later layers. The result: PER recovers to 25.34% (within 0.15% of the pre-trained baseline) while preserving the developmental information that CPT would have destroyed.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot dot-6">6</div>
+        <div class="timeline-card">
+          <div class="timeline-card-header ev-bg-6" onclick="toggleTimeline(this)">
+            <div>
+              <div class="timeline-card-title">Phoneme Recovery</div>
+              <div class="timeline-card-desc">Liquids 99% recovery, stops 127%; category-level validation</div>
+            </div>
+            <span class="timeline-toggle">+ details</span>
+          </div>
+          <div class="timeline-card-body">
+            Phoneme-level analysis shows that Freeze-6 selectively recovers the categories most damaged by CPT. Liquids (the most damaged, +16.74% PER increase under CPT) recover 99% of the way back to baseline. Stops over-recover to 127%. Late-acquired phonemes (age 7-8: /&#633;, &#638;/) recover 92%, confirming the freeze protects developmentally informative categories.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot dot-7">7</div>
+        <div class="timeline-card">
+          <div class="timeline-card-header ev-bg-7" onclick="toggleTimeline(this)">
+            <div>
+              <div class="timeline-card-title">Cross-Model Validation</div>
+              <div class="timeline-card-desc">Age universal (4 models 75.5-78.1%), rate WavLM-specific</div>
+            </div>
+            <span class="timeline-toggle">+ details</span>
+          </div>
+          <div class="timeline-card-body">
+            Testing across four SSL models (WavLM-Large, HuBERT-Large, wav2vec2-Large, WavLM-Base+) reveals that age encoding is universal: all models achieve 75.5-78.1% at Layer 1-2. In contrast, the late-layer rate hierarchy (81.4% at L24) is WavLM-specific. This separation between universal and model-specific developmental encodings has not been reported before.
+          </div>
+        </div>
       </div>
 
     </div>
@@ -457,22 +1165,41 @@ tbody tr:hover {
 
 <script>
 (function() {
-  var layers = ['FP','L1','L2','L6','L12','L18','L24'];
+  // ===================== DATA =====================
+  var LAYERS = ['FP','L1','L2','L6','L12','L18','L24'];
+  var MODELS = ['WavLM-Large','HuBERT-Large','wav2vec2-Large','WavLM-Base+'];
+  var COLORS = ['#e74c3c','#3498db','#27ae60','#9b59b6'];
+  var SHORT_NAMES = ['WavLM','HuBERT','w2v2','Base+'];
 
+  var AGE_DATA = [
+    [75.6, 77.9, 76.9, 76.0, 74.6, 70.5, 74.6],
+    [75.9, 77.0, 78.1, 77.0, 73.7, 69.4, 70.6],
+    [74.8, 76.7, 77.1, 72.8, 65.1, 57.4, 51.8],
+    [73.2, 75.5, 74.5, 70.5, 64.8, null, null]
+  ];
+
+  var RATE_DATA = [
+    [71.0, 70.6, 69.3, 69.5, 74.0, 73.9, 81.4],
+    [69.8, 71.9, 70.8, 70.2, 68.6, 68.5, 71.6],
+    [71.0, 72.5, 71.9, 70.6, 66.3, 63.0, 55.8],
+    [69.6, 71.6, 71.9, 72.6, 69.7, null, null]
+  ];
+
+  // Freeze animation data (PER %)
+  var FREEZE_CATEGORIES = ['Liquids','Stops','Fricatives','Nasals','Vowels','Glides'];
+  var FREEZE_E1  = [28.48, 15.34, 15.33, 16.23, 26.88, 35.46];
+  var FREEZE_E2  = [45.22, 16.57, 18.87, 21.68, 29.26, 32.34];
+  var FREEZE_F6  = [28.64, 15.01, 16.60, 19.59, 29.50, 31.47];
+  var FREEZE_MAX = 50; // max scale for bars
+
+  // ===================== CHART.JS LINE CHARTS =====================
   var commonOptions = {
     responsive: true,
-    interaction: {
-      mode: 'index',
-      intersect: false
-    },
+    interaction: { mode: 'index', intersect: false },
     plugins: {
       legend: {
         position: 'bottom',
-        labels: {
-          usePointStyle: true,
-          padding: 15,
-          font: { size: 12 }
-        }
+        labels: { usePointStyle: true, padding: 15, font: { size: 12 } }
       }
     },
     elements: {
@@ -481,163 +1208,296 @@ tbody tr:hover {
     }
   };
 
-  // Age chart
+  function makeHighlightPlugin(chartRef) {
+    return {
+      id: 'highlightDot',
+      afterDatasetsDraw: function(chart) {
+        var idx = chartRef.highlightIndex;
+        if (idx === undefined || idx === null) return;
+        var ctx = chart.ctx;
+        chart.data.datasets.forEach(function(ds, di) {
+          var val = ds.data[idx];
+          if (val === null || val === undefined) return;
+          var meta = chart.getDatasetMeta(di);
+          var pt = meta.data[idx];
+          if (!pt) return;
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(pt.x, pt.y, 8, 0, 2 * Math.PI);
+          ctx.strokeStyle = ds.borderColor;
+          ctx.lineWidth = 3;
+          ctx.fillStyle = 'rgba(255,255,255,0.8)';
+          ctx.fill();
+          ctx.stroke();
+          ctx.restore();
+        });
+      }
+    };
+  }
+
+  var ageRef = { highlightIndex: null };
+  var rateRef = { highlightIndex: null };
+
   var ageCtx = document.getElementById('ageChart').getContext('2d');
-  new Chart(ageCtx, {
+  var ageChart = new Chart(ageCtx, {
     type: 'line',
     data: {
-      labels: layers,
+      labels: LAYERS,
       datasets: [
-        {
-          label: 'WavLM-Large',
-          data: [75.6, 77.9, 76.9, 76.0, 74.6, 70.5, 74.6],
-          borderColor: '#e74c3c',
-          backgroundColor: '#e74c3c',
-          spanGaps: true
-        },
-        {
-          label: 'HuBERT-Large',
-          data: [75.9, 77.0, 78.1, 77.0, 73.7, 69.4, 70.6],
-          borderColor: '#3498db',
-          backgroundColor: '#3498db',
-          spanGaps: true
-        },
-        {
-          label: 'wav2vec2-Large',
-          data: [74.8, 76.7, 77.1, 72.8, 65.1, 57.4, 51.8],
-          borderColor: '#27ae60',
-          backgroundColor: '#27ae60',
-          spanGaps: true
-        },
-        {
-          label: 'WavLM-Base+',
-          data: [73.2, 75.5, 74.5, 70.5, 64.8, null, null],
-          borderColor: '#9b59b6',
-          backgroundColor: '#9b59b6',
-          borderDash: [5, 3],
-          spanGaps: true
-        }
+        { label: 'WavLM-Large', data: AGE_DATA[0], borderColor: '#e74c3c', backgroundColor: '#e74c3c', spanGaps: true },
+        { label: 'HuBERT-Large', data: AGE_DATA[1], borderColor: '#3498db', backgroundColor: '#3498db', spanGaps: true },
+        { label: 'wav2vec2-Large', data: AGE_DATA[2], borderColor: '#27ae60', backgroundColor: '#27ae60', spanGaps: true },
+        { label: 'WavLM-Base+', data: AGE_DATA[3], borderColor: '#9b59b6', backgroundColor: '#9b59b6', borderDash: [5,3], spanGaps: true }
       ]
     },
     options: Object.assign({}, commonOptions, {
       plugins: Object.assign({}, commonOptions.plugins, {
-        title: {
-          display: true,
-          text: 'Age-Group Probing (4-class, chance=25%)',
-          font: { size: 14, weight: '600' },
-          padding: { bottom: 15 }
-        },
-        annotation: {
-          annotations: {
-            chanceLine: {
-              type: 'line',
-              yMin: 25,
-              yMax: 25,
-              borderColor: '#999',
-              borderDash: [6, 4],
-              borderWidth: 1,
-              label: {
-                content: 'Chance (25%)',
-                enabled: true,
-                position: 'end',
-                font: { size: 10 }
-              }
-            }
-          }
-        }
+        title: { display: true, text: 'Age-Group Probing (4-class, chance=25%)', font: { size: 14, weight: '600' }, padding: { bottom: 15 } }
       }),
       scales: {
-        y: {
-          min: 20,
-          max: 85,
-          title: {
-            display: true,
-            text: 'Accuracy (%)',
-            font: { size: 12 }
-          }
-        }
+        y: { min: 20, max: 85, title: { display: true, text: 'Accuracy (%)', font: { size: 12 } } }
       }
-    })
+    }),
+    plugins: [makeHighlightPlugin(ageRef)]
   });
 
-  // Rate chart
   var rateCtx = document.getElementById('rateChart').getContext('2d');
-  new Chart(rateCtx, {
+  var rateChart = new Chart(rateCtx, {
     type: 'line',
     data: {
-      labels: layers,
+      labels: LAYERS,
       datasets: [
-        {
-          label: 'WavLM-Large',
-          data: [71.0, 70.6, 69.3, 69.5, 74.0, 73.9, 81.4],
-          borderColor: '#e74c3c',
-          backgroundColor: '#e74c3c',
-          spanGaps: true
-        },
-        {
-          label: 'HuBERT-Large',
-          data: [69.8, 71.9, 70.8, 70.2, 68.6, 68.5, 71.6],
-          borderColor: '#3498db',
-          backgroundColor: '#3498db',
-          spanGaps: true
-        },
-        {
-          label: 'wav2vec2-Large',
-          data: [71.0, 72.5, 71.9, 70.6, 66.3, 63.0, 55.8],
-          borderColor: '#27ae60',
-          backgroundColor: '#27ae60',
-          spanGaps: true
-        },
-        {
-          label: 'WavLM-Base+',
-          data: [69.6, 71.6, 71.9, 72.6, 69.7, null, null],
-          borderColor: '#9b59b6',
-          backgroundColor: '#9b59b6',
-          borderDash: [5, 3],
-          spanGaps: true
-        }
+        { label: 'WavLM-Large', data: RATE_DATA[0], borderColor: '#e74c3c', backgroundColor: '#e74c3c', spanGaps: true },
+        { label: 'HuBERT-Large', data: RATE_DATA[1], borderColor: '#3498db', backgroundColor: '#3498db', spanGaps: true },
+        { label: 'wav2vec2-Large', data: RATE_DATA[2], borderColor: '#27ae60', backgroundColor: '#27ae60', spanGaps: true },
+        { label: 'WavLM-Base+', data: RATE_DATA[3], borderColor: '#9b59b6', backgroundColor: '#9b59b6', borderDash: [5,3], spanGaps: true }
       ]
     },
     options: Object.assign({}, commonOptions, {
       plugins: Object.assign({}, commonOptions.plugins, {
-        title: {
-          display: true,
-          text: 'Speaking-Rate Probing (3-class, chance=33.3%)',
-          font: { size: 14, weight: '600' },
-          padding: { bottom: 15 }
-        },
-        annotation: {
-          annotations: {
-            chanceLine: {
-              type: 'line',
-              yMin: 33.3,
-              yMax: 33.3,
-              borderColor: '#999',
-              borderDash: [6, 4],
-              borderWidth: 1,
-              label: {
-                content: 'Chance (33.3%)',
-                enabled: true,
-                position: 'end',
-                font: { size: 10 }
-              }
-            }
-          }
-        }
+        title: { display: true, text: 'Speaking-Rate Probing (3-class, chance=33.3%)', font: { size: 14, weight: '600' }, padding: { bottom: 15 } }
       }),
       scales: {
-        y: {
-          min: 30,
-          max: 85,
-          title: {
-            display: true,
-            text: 'Accuracy (%)',
-            font: { size: 12 }
-          }
-        }
+        y: { min: 30, max: 85, title: { display: true, text: 'Accuracy (%)', font: { size: 12 } } }
       }
-    })
+    }),
+    plugins: [makeHighlightPlugin(rateRef)]
   });
+
+  // ===================== SLIDER + BAR CHART =====================
+  // Build tick labels
+  var ticksEl = document.getElementById('sliderTicks');
+  LAYERS.forEach(function(l, i) {
+    var s = document.createElement('span');
+    s.textContent = l;
+    s.onclick = function() {
+      document.getElementById('layerSlider').value = i;
+      updateSlider(i);
+    };
+    ticksEl.appendChild(s);
+  });
+
+  // Build bar elements
+  function buildBars(containerId, dataArray) {
+    var container = document.getElementById(containerId);
+    container.innerHTML = '';
+    for (var m = 0; m < 4; m++) {
+      var item = document.createElement('div');
+      item.className = 'bar-item';
+
+      var valEl = document.createElement('div');
+      valEl.className = 'bar-value';
+      valEl.id = containerId + '-val-' + m;
+
+      var bar = document.createElement('div');
+      bar.className = 'bar bar-' + ['wavlm','hubert','wav2vec','base'][m];
+      bar.id = containerId + '-bar-' + m;
+
+      var label = document.createElement('div');
+      label.className = 'bar-label';
+      label.textContent = SHORT_NAMES[m];
+
+      item.appendChild(valEl);
+      item.appendChild(bar);
+      item.appendChild(label);
+      container.appendChild(item);
+    }
+  }
+
+  buildBars('ageBars', AGE_DATA);
+  buildBars('rateBars', RATE_DATA);
+
+  function updateSlider(idx) {
+    document.getElementById('layerDisplay').textContent = LAYERS[idx];
+
+    // Update bar heights
+    var maxH = 150;
+    for (var m = 0; m < 4; m++) {
+      // Age
+      var ageVal = AGE_DATA[m][idx];
+      var ageBar = document.getElementById('ageBars-bar-' + m);
+      var ageValEl = document.getElementById('ageBars-val-' + m);
+      if (ageVal !== null && ageVal !== undefined) {
+        var h = (ageVal / 85) * maxH;
+        ageBar.style.height = h + 'px';
+        ageBar.style.opacity = '1';
+        ageValEl.textContent = ageVal.toFixed(1);
+      } else {
+        ageBar.style.height = '0px';
+        ageBar.style.opacity = '0.3';
+        ageValEl.textContent = 'N/A';
+      }
+
+      // Rate
+      var rateVal = RATE_DATA[m][idx];
+      var rateBar = document.getElementById('rateBars-bar-' + m);
+      var rateValEl = document.getElementById('rateBars-val-' + m);
+      if (rateVal !== null && rateVal !== undefined) {
+        var h2 = (rateVal / 85) * maxH;
+        rateBar.style.height = h2 + 'px';
+        rateBar.style.opacity = '1';
+        rateValEl.textContent = rateVal.toFixed(1);
+      } else {
+        rateBar.style.height = '0px';
+        rateBar.style.opacity = '0.3';
+        rateValEl.textContent = 'N/A';
+      }
+    }
+
+    // Update highlight dots on line charts
+    ageRef.highlightIndex = idx;
+    rateRef.highlightIndex = idx;
+    ageChart.update('none');
+    rateChart.update('none');
+  }
+
+  document.getElementById('layerSlider').addEventListener('input', function() {
+    updateSlider(parseInt(this.value));
+  });
+
+  // Initialize at FP
+  updateSlider(0);
+
+  // ===================== FREEZE ANIMATION =====================
+  // Build freeze bars
+  var freezeArea = document.getElementById('freezeBarsArea');
+  FREEZE_CATEGORIES.forEach(function(cat, i) {
+    var row = document.createElement('div');
+    row.className = 'freeze-bar-row';
+
+    var name = document.createElement('div');
+    name.className = 'freeze-bar-name';
+    name.textContent = cat;
+
+    var track = document.createElement('div');
+    track.className = 'freeze-bar-track';
+
+    var fill = document.createElement('div');
+    fill.className = 'freeze-bar-fill baseline';
+    fill.id = 'freeze-fill-' + i;
+    var pct = (FREEZE_E1[i] / FREEZE_MAX) * 100;
+    fill.style.width = pct + '%';
+    fill.textContent = FREEZE_E1[i].toFixed(1) + '%';
+
+    track.appendChild(fill);
+    row.appendChild(name);
+    row.appendChild(track);
+    freezeArea.appendChild(row);
+  });
+
+  window.freezeAnimStep = 0;
+
+  window.runFreezeAnimation = function() {
+    var btn = document.getElementById('freezeStartBtn');
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    var label = document.getElementById('freezeStepLabel');
+
+    // Step 1: show baseline (already shown), transition to CPT
+    window.freezeAnimStep = 1;
+    label.innerHTML = '<span class="step-label">Step 1/3:</span> E1 Baseline (pre-trained)';
+
+    setTimeout(function() {
+      // Step 2: animate to CPT
+      window.freezeAnimStep = 2;
+      label.innerHTML = '<span class="step-label">Step 2/3:</span> E2 Corpus-level adaptation &mdash; damage';
+      FREEZE_CATEGORIES.forEach(function(cat, i) {
+        var fill = document.getElementById('freeze-fill-' + i);
+        fill.className = 'freeze-bar-fill cpt';
+        var pct = (FREEZE_E2[i] / FREEZE_MAX) * 100;
+        fill.style.width = pct + '%';
+        fill.textContent = FREEZE_E2[i].toFixed(1) + '%';
+      });
+
+      setTimeout(function() {
+        // Step 3: animate to Freeze-6
+        window.freezeAnimStep = 3;
+        label.innerHTML = '<span class="step-label">Step 3/3:</span> Freeze-6 &mdash; recovery';
+        FREEZE_CATEGORIES.forEach(function(cat, i) {
+          var fill = document.getElementById('freeze-fill-' + i);
+          fill.className = 'freeze-bar-fill freeze';
+          var pct = (FREEZE_F6[i] / FREEZE_MAX) * 100;
+          fill.style.width = pct + '%';
+          fill.textContent = FREEZE_F6[i].toFixed(1) + '%';
+        });
+        setTimeout(function() {
+          btn.disabled = false;
+          btn.style.opacity = '1';
+          label.innerHTML = '<span class="step-label">Complete</span> &mdash; Compare bars to Table 1 above';
+        }, 900);
+      }, 1500);
+    }, 1200);
+  };
+
+  window.resetFreezeAnimation = function() {
+    window.freezeAnimStep = 0;
+    document.getElementById('freezeStepLabel').innerHTML = '<span class="step-label">Ready</span>';
+    document.getElementById('freezeStartBtn').disabled = false;
+    document.getElementById('freezeStartBtn').style.opacity = '1';
+    FREEZE_CATEGORIES.forEach(function(cat, i) {
+      var fill = document.getElementById('freeze-fill-' + i);
+      fill.className = 'freeze-bar-fill baseline';
+      var pct = (FREEZE_E1[i] / FREEZE_MAX) * 100;
+      fill.style.width = pct + '%';
+      fill.textContent = FREEZE_E1[i].toFixed(1) + '%';
+    });
+  };
+
+  // ===================== TIMELINE EXPAND/COLLAPSE =====================
+  window.toggleTimeline = function(header) {
+    var body = header.nextElementSibling;
+    var toggle = header.querySelector('.timeline-toggle');
+    if (body.classList.contains('open')) {
+      body.classList.remove('open');
+      toggle.textContent = '+ details';
+    } else {
+      body.classList.add('open');
+      toggle.textContent = '- hide';
+    }
+  };
+
+  // ===================== TOC ACTIVE HIGHLIGHT =====================
+  var tocLinks = document.querySelectorAll('.toc a');
+  var sections = [];
+  tocLinks.forEach(function(link) {
+    var id = link.getAttribute('href').substring(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({ link: link, el: el });
+  });
+
+  function updateTOC() {
+    var scrollY = window.scrollY + 80;
+    var current = null;
+    sections.forEach(function(s) {
+      if (s.el.offsetTop <= scrollY) current = s;
+    });
+    tocLinks.forEach(function(l) { l.classList.remove('active'); });
+    if (current) current.link.classList.add('active');
+  }
+
+  window.addEventListener('scroll', updateTOC);
+  updateTOC();
+
 })();
 </script>
 
