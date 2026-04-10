@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Supplementary Materials</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, system-ui, sans-serif;
+  background: #fff;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 40px;
+}
+
+.header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #1a1a2e;
+}
+
+.header .subtitle {
+  font-size: 16px;
+  color: #555;
+  font-style: italic;
+}
+
+/* Section titles */
+.section-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #3498db;
+  display: inline-block;
+}
+
+section {
+  margin-bottom: 50px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Charts */
+.charts-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.chart-wrapper {
+  flex: 1;
+  min-width: 420px;
+  max-width: 480px;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 15px;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+table caption {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 10px;
+  text-align: left;
+  color: #1a1a2e;
+}
+
+thead th {
+  background: #1a1a2e;
+  color: #fff;
+  padding: 10px 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+thead th:first-child {
+  text-align: left;
+}
+
+tbody td {
+  padding: 9px 12px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+tbody td:first-child {
+  text-align: left;
+  font-weight: 500;
+}
+
+tbody tr:hover {
+  background: #f0f4f8;
+}
+
+.table-wrapper {
+  margin-bottom: 35px;
+  overflow-x: auto;
+}
+
+.recovery-green {
+  background-color: #d5f5e3;
+}
+
+.recovery-yellow {
+  background-color: #fcf3cf;
+}
+
+.recovery-red {
+  background-color: #fadbd8;
+}
+
+/* Evidence chain */
+.evidence-chain {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.evidence-box {
+  flex: 1;
+  min-width: 115px;
+  max-width: 135px;
+  text-align: center;
+  position: relative;
+}
+
+.evidence-box .box-inner {
+  border-radius: 6px;
+  padding: 12px 8px;
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.evidence-box .box-number {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.evidence-box .box-title {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.evidence-box .box-desc {
+  font-size: 11px;
+  color: #555;
+  margin-top: 6px;
+  line-height: 1.3;
+}
+
+.evidence-arrow {
+  display: flex;
+  align-items: center;
+  padding-top: 15px;
+  color: #999;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.ev-color-1 { background: #ebf5fb; border: 1px solid #aed6f1; }
+.ev-color-2 { background: #fdf2e9; border: 1px solid #f5cba7; }
+.ev-color-3 { background: #e8f8f5; border: 1px solid #a3e4d7; }
+.ev-color-4 { background: #f5eef8; border: 1px solid #d2b4de; }
+.ev-color-5 { background: #fdedec; border: 1px solid #f5b7b1; }
+.ev-color-6 { background: #eafaf1; border: 1px solid #a9dfbf; }
+.ev-color-7 { background: #fef9e7; border: 1px solid #f9e79f; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding-top: 20px;
+  color: #888;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .charts-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .chart-wrapper {
+    min-width: 100%;
+  }
+  .evidence-chain {
+    flex-wrap: wrap;
+  }
+  .evidence-arrow {
+    display: none;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Supplementary Materials</h1>
+    <p class="subtitle">Cross-Model Probing of Developmental Information in Children's Speech</p>
+  </div>
+
+  <!-- Charts Section -->
+  <section>
+    <h2 class="section-title">Cross-Model Probing Results</h2>
+    <div class="charts-container">
+      <div class="chart-wrapper">
+        <canvas id="ageChart"></canvas>
+      </div>
+      <div class="chart-wrapper">
+        <canvas id="rateChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tables Section -->
+  <section>
+    <h2 class="section-title">Phoneme-Level Analysis</h2>
+
+    <div class="table-wrapper">
+      <table>
+        <caption>Table 1: Phoneme-Category Recovery (Manner of Articulation)</caption>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>E1 (baseline)</th>
+            <th>E2 (CPT)</th>
+            <th>Freeze-6</th>
+            <th>CPT Damage</th>
+            <th>Recovery</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Liquids</td>
+            <td>28.48%</td>
+            <td>45.22%</td>
+            <td>28.64%</td>
+            <td>+16.74%</td>
+            <td class="recovery-green">99%</td>
+          </tr>
+          <tr>
+            <td>Stops</td>
+            <td>15.34%</td>
+            <td>16.57%</td>
+            <td>15.01%</td>
+            <td>+1.23%</td>
+            <td class="recovery-green">127%</td>
+          </tr>
+          <tr>
+            <td>Fricatives</td>
+            <td>15.33%</td>
+            <td>18.87%</td>
+            <td>16.60%</td>
+            <td>+3.54%</td>
+            <td class="recovery-yellow">64%</td>
+          </tr>
+          <tr>
+            <td>Nasals</td>
+            <td>16.23%</td>
+            <td>21.68%</td>
+            <td>19.59%</td>
+            <td>+5.45%</td>
+            <td class="recovery-yellow">38%</td>
+          </tr>
+          <tr>
+            <td>Vowels</td>
+            <td>26.88%</td>
+            <td>29.26%</td>
+            <td>29.50%</td>
+            <td>+2.38%</td>
+            <td class="recovery-red">0%</td>
+          </tr>
+          <tr>
+            <td>Glides</td>
+            <td>35.46%</td>
+            <td>32.34%</td>
+            <td>31.47%</td>
+            <td>-3.12%</td>
+            <td>&mdash;</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <caption>Table 2: Developmental Acquisition Stage Recovery</caption>
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Phonemes</th>
+            <th>E1</th>
+            <th>E2</th>
+            <th>Freeze-6</th>
+            <th>CPT Damage</th>
+            <th>Recovery</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Early (&lt;3y)</td>
+            <td>p, b, m, n, w, h, j, d</td>
+            <td>49.6%</td>
+            <td>50.9%</td>
+            <td>49.7%</td>
+            <td>+1.3%</td>
+            <td class="recovery-green">96%</td>
+          </tr>
+          <tr>
+            <td>Mid (3-5y)</td>
+            <td>t, k, g, f, &#331;, l</td>
+            <td>43.3%</td>
+            <td>45.9%</td>
+            <td>44.7%</td>
+            <td>+2.6%</td>
+            <td class="recovery-yellow">46%</td>
+          </tr>
+          <tr>
+            <td>Late (5-7y)</td>
+            <td>s, z, &#643;, t&#643;, d&#658;, v, &#952;, &#240;</td>
+            <td>47.4%</td>
+            <td>51.3%</td>
+            <td>48.1%</td>
+            <td>+3.9%</td>
+            <td class="recovery-green">83%</td>
+          </tr>
+          <tr>
+            <td>Latest (7-8y)</td>
+            <td>&#633;, &#638;, &#619;, &#658;</td>
+            <td>47.2%</td>
+            <td>65.3%</td>
+            <td>48.7%</td>
+            <td>+18.1%</td>
+            <td class="recovery-green">92%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Evidence Chain Section -->
+  <section>
+    <h2 class="section-title">Evidence Chain</h2>
+    <div class="evidence-chain">
+
+      <div class="evidence-box">
+        <div class="box-inner ev-color-1">
+          <div class="box-number">&#9312;</div>
+          <div class="box-title">Factorial ANOVA</div>
+        </div>
+        <div class="box-desc">Adaptation strategy significantly affects PER (F=32.23, p&lt;.001)</div>
+      </div>
+      <div class="evidence-arrow">&rarr;</div>
+
+      <div class="evidence-box">
+        <div class="box-inner ev-color-2">
+          <div class="box-number">&#9313;</div>
+          <div class="box-title">Training Dynamics</div>
+        </div>
+        <div class="box-desc">CPT degrades then recovers; freezing stabilizes early</div>
+      </div>
+      <div class="evidence-arrow">&rarr;</div>
+
+      <div class="evidence-box">
+        <div class="box-inner ev-color-3">
+          <div class="box-number">&#9314;</div>
+          <div class="box-title">Layer Probing</div>
+        </div>
+        <div class="box-desc">Age in early layers (L1), rate in late layers (L24)</div>
+      </div>
+      <div class="evidence-arrow">&rarr;</div>
+
+      <div class="evidence-box">
+        <div class="box-inner ev-color-4">
+          <div class="box-number">&#9315;</div>
+          <div class="box-title">Concept Erasure</div>
+        </div>
+        <div class="box-desc">Removing age causes +13.73% PER (causal evidence)</div>
+      </div>
+      <div class="evidence-arrow">&rarr;</div>
+
+      <div class="evidence-box">
+        <div class="box-inner ev-color-5">
+          <div class="box-number">&#9316;</div>
+          <div class="box-title">Layer Freezing</div>
+        </div>
+        <div class="box-desc">Freeze-6 preserves age encoding, recovers PER to 25.34%</div>
+      </div>
+      <div class="evidence-arrow">&rarr;</div>
+
+      <div class="evidence-box">
+        <div class="box-inner ev-color-6">
+          <div class="box-number">&#9317;</div>
+          <div class="box-title">Phoneme Recovery</div>
+        </div>
+        <div class="box-desc">Liquids 99%, stops 127%; category-level validation</div>
+      </div>
+      <div class="evidence-arrow">&rarr;</div>
+
+      <div class="evidence-box">
+        <div class="box-inner ev-color-7">
+          <div class="box-number">&#9318;</div>
+          <div class="box-title">Cross-Model</div>
+        </div>
+        <div class="box-desc">Age universal (4 models), rate hierarchy WavLM-specific</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer">
+    Part of ongoing research. Last updated: April 2026
+  </div>
+
+</div>
+
+<script>
+(function() {
+  var layers = ['FP','L1','L2','L6','L12','L18','L24'];
+
+  var commonOptions = {
+    responsive: true,
+    interaction: {
+      mode: 'index',
+      intersect: false
+    },
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          usePointStyle: true,
+          padding: 15,
+          font: { size: 12 }
+        }
+      }
+    },
+    elements: {
+      point: { radius: 4 },
+      line: { tension: 0.2 }
+    }
+  };
+
+  // Age chart
+  var ageCtx = document.getElementById('ageChart').getContext('2d');
+  new Chart(ageCtx, {
+    type: 'line',
+    data: {
+      labels: layers,
+      datasets: [
+        {
+          label: 'WavLM-Large',
+          data: [75.6, 77.9, 76.9, 76.0, 74.6, 70.5, 74.6],
+          borderColor: '#e74c3c',
+          backgroundColor: '#e74c3c',
+          spanGaps: true
+        },
+        {
+          label: 'HuBERT-Large',
+          data: [75.9, 77.0, 78.1, 77.0, 73.7, 69.4, 70.6],
+          borderColor: '#3498db',
+          backgroundColor: '#3498db',
+          spanGaps: true
+        },
+        {
+          label: 'wav2vec2-Large',
+          data: [74.8, 76.7, 77.1, 72.8, 65.1, 57.4, 51.8],
+          borderColor: '#27ae60',
+          backgroundColor: '#27ae60',
+          spanGaps: true
+        },
+        {
+          label: 'WavLM-Base+',
+          data: [73.2, 75.5, 74.5, 70.5, 64.8, null, null],
+          borderColor: '#9b59b6',
+          backgroundColor: '#9b59b6',
+          borderDash: [5, 3],
+          spanGaps: true
+        }
+      ]
+    },
+    options: Object.assign({}, commonOptions, {
+      plugins: Object.assign({}, commonOptions.plugins, {
+        title: {
+          display: true,
+          text: 'Age-Group Probing (4-class, chance=25%)',
+          font: { size: 14, weight: '600' },
+          padding: { bottom: 15 }
+        },
+        annotation: {
+          annotations: {
+            chanceLine: {
+              type: 'line',
+              yMin: 25,
+              yMax: 25,
+              borderColor: '#999',
+              borderDash: [6, 4],
+              borderWidth: 1,
+              label: {
+                content: 'Chance (25%)',
+                enabled: true,
+                position: 'end',
+                font: { size: 10 }
+              }
+            }
+          }
+        }
+      }),
+      scales: {
+        y: {
+          min: 20,
+          max: 85,
+          title: {
+            display: true,
+            text: 'Accuracy (%)',
+            font: { size: 12 }
+          }
+        }
+      }
+    })
+  });
+
+  // Rate chart
+  var rateCtx = document.getElementById('rateChart').getContext('2d');
+  new Chart(rateCtx, {
+    type: 'line',
+    data: {
+      labels: layers,
+      datasets: [
+        {
+          label: 'WavLM-Large',
+          data: [71.0, 70.6, 69.3, 69.5, 74.0, 73.9, 81.4],
+          borderColor: '#e74c3c',
+          backgroundColor: '#e74c3c',
+          spanGaps: true
+        },
+        {
+          label: 'HuBERT-Large',
+          data: [69.8, 71.9, 70.8, 70.2, 68.6, 68.5, 71.6],
+          borderColor: '#3498db',
+          backgroundColor: '#3498db',
+          spanGaps: true
+        },
+        {
+          label: 'wav2vec2-Large',
+          data: [71.0, 72.5, 71.9, 70.6, 66.3, 63.0, 55.8],
+          borderColor: '#27ae60',
+          backgroundColor: '#27ae60',
+          spanGaps: true
+        },
+        {
+          label: 'WavLM-Base+',
+          data: [69.6, 71.6, 71.9, 72.6, 69.7, null, null],
+          borderColor: '#9b59b6',
+          backgroundColor: '#9b59b6',
+          borderDash: [5, 3],
+          spanGaps: true
+        }
+      ]
+    },
+    options: Object.assign({}, commonOptions, {
+      plugins: Object.assign({}, commonOptions.plugins, {
+        title: {
+          display: true,
+          text: 'Speaking-Rate Probing (3-class, chance=33.3%)',
+          font: { size: 14, weight: '600' },
+          padding: { bottom: 15 }
+        },
+        annotation: {
+          annotations: {
+            chanceLine: {
+              type: 'line',
+              yMin: 33.3,
+              yMax: 33.3,
+              borderColor: '#999',
+              borderDash: [6, 4],
+              borderWidth: 1,
+              label: {
+                content: 'Chance (33.3%)',
+                enabled: true,
+                position: 'end',
+                font: { size: 10 }
+              }
+            }
+          }
+        }
+      }),
+      scales: {
+        y: {
+          min: 30,
+          max: 85,
+          title: {
+            display: true,
+            text: 'Accuracy (%)',
+            font: { size: 12 }
+          }
+        }
+      }
+    })
+  });
+})();
+</script>
+
+</body>
+</html>
